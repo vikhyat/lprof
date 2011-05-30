@@ -30,5 +30,5 @@ end
 out.puts footer
 out.close
 
-puts `ruby #{filename}lp > /dev/null`
+print `ruby #{filename}lp > /dev/null`
 File.delete(filename+'lp')
