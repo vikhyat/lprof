@@ -10,7 +10,7 @@ input    = $stdin.readlines.join.gsub("'", '\\\\\'')
 
 # error-checking, and making range an array of two numbers
 if range =~ /^(\d+)\.\.(\d+)$/
-  range = range.split('..').map {|x| x.to_i }
+  range = range.split('..').map {|x| x.to_i-1 }
   if range[0] > range[1]
     ferror["lower value must not be greater than second in the range: '#{range*'..'}'"]
   end
@@ -24,11 +24,11 @@ end
 out = File.new(filename+'lp', 'w')
 
 out.puts("#{variable} = Array.new(#{range[1]-range[0]+1}) { 0 }")
-1.upto(code.length) do |line_number|
+0.upto(code.length-1) do |line_number|
   if line_number >= range[0] and line_number <= range[1]
     out.puts "#{variable}[#{line_number-range[0]}] += 1"
   end
-  out.puts code[line_number-1]
+  out.puts code[line_number]
 end
 
 footer = [
@@ -39,7 +39,7 @@ footer = [
 ]
 range[0].upto(range[1]) do |line_number|
   footer << "$stderr.printf \"%\#{ml}d | \", #{variable}[#{line_number-range[0]}]"
-  footer << "$stderr.puts '#{code[line_number-1].chomp}'"
+  footer << "$stderr.puts '#{code[line_number].chomp}'"
 end
 
 out.puts footer
