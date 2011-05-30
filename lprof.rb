@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 ferror = -> a { $stderr.puts('ERROR: '+a); exit(1) }
 
 filename = ARGV[0]
