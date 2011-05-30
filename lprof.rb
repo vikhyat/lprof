@@ -17,7 +17,7 @@ ext      = "lp"
 if range =~ /^(\d+)\.\.(\d+)$/
   range = range.split('..').map {|x| x.to_i-1 }
   if range[0] > range[1]
-    ferror "lower value must not be greater than second in the range: '#{range*'..'}'"
+    ferror "lower value is greater than second in the range: '#{range*'..'}'"
   end
 else
   ferror "range is incorrectly specified: '#{range}'"
