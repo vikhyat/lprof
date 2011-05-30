@@ -17,7 +17,6 @@ out.puts("#{variable} = Array.new(#{range[1]-range[0]+1}) { 0 }")
 end
 
 footer = [
-  "$stderr.puts",
   "$stderr.puts(' --------------------------')",
   "$stderr.puts(' LINE-WISE PROFILING REPORT')",
   "$stderr.puts(' --------------------------')",
@@ -29,3 +28,6 @@ range[0].upto(range[1]) do |line_number|
 end
 
 out.puts footer
+out.close
+
+puts `ruby #{filename}lp > /dev/null`
