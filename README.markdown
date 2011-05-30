@@ -4,10 +4,11 @@ lprof - Line-wise profiling for Ruby
 Usage
 -----
 
-    lprof.rb FILENAME [RANGE]
+    lprof.rb FILENAME [RANGE] [--time]
 
 * FILENAME is the name of the file to be profiled.
 * RANGE is the range of line-numbers to be profiled. It should be of the form `a..b` where `a` and `b` are the lower and upper line-numbers.
+* If `--time` is included, the time taken by each step (in milliseconds) is also measured. Including this significantly increases the time taken by the profiling.
 
 Example
 -------
