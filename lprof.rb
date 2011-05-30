@@ -6,10 +6,15 @@ def ferror(a)
   exit(1)
 end
 
+# replace 's with \'s
+def escape_single_quotes(str)
+  str.gsub("'", '\\\\\'')
+end
+
 filename = ARGV[0]
 code     = File.new(filename).readlines
 range    = ARGV[1] || "1..#{code.length}"
-input    = $stdin.readlines.join.gsub("'", '\\\\\'')
+input    = escape_single_quotes($stdin.readlines.join)
 variable = "$lprof0833_c"
 ext      = "lp"
 
@@ -47,7 +52,7 @@ out.puts "ml = #{variable}.max.to_s.length"
 
 range[0].upto(range[1]) do |line_number|
   out.puts "$stderr.printf \"%\#{ml}d | \",#{variable}[#{line_number-range[0]}]"
-  out.puts "$stderr.puts '#{code[line_number].chomp}'"
+  out.puts "$stderr.puts '#{escape_single_quotes(code[line_number].chomp)}'"
 end
 
 out.close
