@@ -26,5 +26,7 @@ small_primes.each do |p|
 end
 
 (upper-lower+1).times do |i|
-  puts lower+i if sieve[lower+i]
+  if sieve[lower+i]
+    puts lower+i
+  end
 end
