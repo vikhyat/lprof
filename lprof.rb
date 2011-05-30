@@ -1,10 +1,22 @@
+ferror = -> a { $stderr.puts('ERROR: '+a); exit(1) }
+
 filename = ARGV[0]
 code     = File.new(filename).readlines
 range    = ARGV[1] || "1..#{code.length}"
 variable = ARGV[2] || "$lprof0833_c"
-fail "bad range: #{range}" if not range =~ /^(\d+)\.\.(\d+)$/
-range = range.split('..').map {|x| x.to_i }
-fail "bad range: #{range*'..'}" if range[0] > range[1]
+
+# error-checking, and making range an array of two numbers
+if range =~ /^(\d+)\.\.(\d+)$/
+  range = range.split('..').map {|x| x.to_i }
+  if range[0] > range[1]
+    ferror["lower value must not be greater than second in the range: '#{range*'..'}'"]
+  end
+else
+  ferror["range is incorrectly specified: '#{range}'"]
+end
+if variable[0] != "$"
+  ferror["counting variable should begin with $: '#{variable}'"]
+end
 
 out = File.new(filename+'lp', 'w')
 
