@@ -5,7 +5,7 @@ ferror = -> a { $stderr.puts('ERROR: '+a); exit(1) }
 filename = ARGV[0]
 code     = File.new(filename).readlines
 range    = ARGV[1] || "1..#{code.length}"
-variable = ARGV[2] || "$lprof0833_c"
+variable = "$lprof0833_c"
 input    = $stdin.readlines.join.gsub("'", '\\\\\'')
 
 # error-checking, and making range an array of two numbers
