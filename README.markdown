@@ -4,7 +4,7 @@ lprof - Line-wise profiling for Ruby
 Usage
 -----
 
-    ./lprof.rb FILENAME [RANGE]
+    lprof.rb FILENAME [RANGE]
 
 * FILENAME is the name of the file to be profiled.
 * RANGE is the range of line-numbers to be profiled. It should be of the form `a..b` where `a` and `b` are the lower and upper line-numbers.
@@ -59,3 +59,8 @@ Example
     152409 |     if i % p == 0
       7141 |       prime = false
       7141 |       break
+
+Installation
+------------
+
+All the work is done by `lprof.rb`, to install just drop that file somewhere in your `PATH`.
