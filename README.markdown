@@ -15,7 +15,7 @@ Example
 `cat input | ./lprof.rb example.rb` gives the following output:
 
     --------------------------
-     LINE-WISE PROFILING REPORT
+    LINE-WISE PROFILING REPORT
     --------------------------
          1 | small_primes = [2,3,5]
          1 | 
