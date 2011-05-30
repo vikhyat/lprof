@@ -4,6 +4,7 @@ filename = ARGV[0]
 code     = File.new(filename).readlines
 range    = ARGV[1] || "1..#{code.length}"
 variable = ARGV[2] || "$lprof0833_c"
+input    = $stdin.readlines.join.gsub("'", '\\\\\'')
 
 # error-checking, and making range an array of two numbers
 if range =~ /^(\d+)\.\.(\d+)$/
@@ -42,5 +43,5 @@ end
 out.puts footer
 out.close
 
-print `ruby #{filename}lp > /dev/null`
+print `echo '#{input}' | ruby #{filename}lp > /dev/null`
 File.delete(filename+'lp')

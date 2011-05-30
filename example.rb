@@ -15,8 +15,8 @@ small_primes = [2,3,5]
   small_primes << i if prime
 end
 
-lower = 123456
-upper = 654321
+lower = gets.to_i
+upper = gets.to_i
 
 sieve = Hash.new(true)
 small_primes.each do |p|
