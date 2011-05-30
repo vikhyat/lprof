@@ -13,6 +13,7 @@ Example
 -------
 
 `cat input | ./lprof.rb example.rb` gives the following output:
+
     --------------------------
      LINE-WISE PROFILING REPORT
     --------------------------
@@ -51,12 +52,10 @@ Example
 
 
 `cat input | ./lprof.rb example.rb 10..12` gives the following output:
+
      --------------------------
      LINE-WISE PROFILING REPORT
      --------------------------
     152409 |     if i % p == 0
       7141 |       prime = false
       7141 |       break
-
-
-
