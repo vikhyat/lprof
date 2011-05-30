@@ -1,27 +1,32 @@
 #!/usr/bin/env ruby
 
-ferror = -> a { $stderr.puts('ERROR: '+a); exit(1) }
+# Takes care of fatal errors
+def ferror(a)
+  $stderr.puts('ERROR: '+a)
+  exit(1)
+end
 
 filename = ARGV[0]
 code     = File.new(filename).readlines
 range    = ARGV[1] || "1..#{code.length}"
-variable = "$lprof0833_c"
 input    = $stdin.readlines.join.gsub("'", '\\\\\'')
+variable = "$lprof0833_c"
+ext      = "lp"
 
 # error-checking, and making range an array of two numbers
 if range =~ /^(\d+)\.\.(\d+)$/
   range = range.split('..').map {|x| x.to_i-1 }
   if range[0] > range[1]
-    ferror["lower value must not be greater than second in the range: '#{range*'..'}'"]
+    ferror "lower value must not be greater than second in the range: '#{range*'..'}'"
   end
 else
-  ferror["range is incorrectly specified: '#{range}'"]
+  ferror "range is incorrectly specified: '#{range}'"
 end
 if variable[0] != "$"
-  ferror["counting variable should begin with $: '#{variable}'"]
+  ferror "counting variable should begin with $: '#{variable}'"
 end
 
-out = File.new(filename+'lp', 'w')
+out = File.new(filename+ext, 'w')
 
 out.puts("#{variable} = Array.new(#{range[1]-range[0]+1}) { 0 }")
 0.upto(code.length-1) do |line_number|
@@ -45,5 +50,5 @@ end
 out.puts footer
 out.close
 
-print `echo '#{input}' | ruby #{filename}lp > /dev/null`
-File.delete(filename+'lp')
+print `echo '#{input}' | ruby #{filename}#{ext} > /dev/null`
+File.delete(filename+ext)
